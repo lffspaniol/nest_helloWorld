@@ -3,6 +3,7 @@ import { HelloworldService } from './helloworld.service';
 import { HelloworldResolver } from './helloworld.resolver';
 
 @Module({
-  providers: [HelloworldService , HelloworldResolver],
+  providers: [HelloworldService, HelloworldResolver],
+  exports: [HelloworldResolver],
 })
 export class HelloWorldModule {}

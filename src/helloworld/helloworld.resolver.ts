@@ -14,7 +14,7 @@ export class HelloworldResolver {
     };
   }
 
-  @Query()
+  @Query('add')
   add(@Args('id') id: number) {
     console.log(id)
     return this.toAdd(this.helloworldService.getCount());

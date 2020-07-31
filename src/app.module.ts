@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { HelloworldService } from './helloworld/helloworld.service';
+import { HelloWorldModule } from './helloworld/helloworld.module';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { HelloworldService } from './helloworld/helloworld.service';
         path: join(process.cwd(), 'src/graphql.ts'),
       },
     }),
+    HelloWorldModule
   ],
-  providers: [HelloworldService],
 })
 export class AppModule {}
