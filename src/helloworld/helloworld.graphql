@@ -1,0 +1,12 @@
+type HelloWorld {
+  ID: ID!
+  count: Int
+  Hello: String!
+}
+
+type Query {
+  add(id: ID!): HelloWorld
+}
+type Subscription {
+  addHelloWorld: HelloWorld!
+}
