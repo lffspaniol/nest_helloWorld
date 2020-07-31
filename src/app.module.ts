@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { HelloWorldModule } from './helloworld/helloworld.module';
+import { DatabaseService } from './database/database.service';
+import { HelloworldService } from './helloworld/helloworld.service';
 
 @Module({
   imports: [
@@ -13,5 +15,6 @@ import { HelloWorldModule } from './helloworld/helloworld.module';
     }),
     HelloWorldModule
   ],
+  providers: [DatabaseService, HelloworldService],
 })
 export class AppModule {}
