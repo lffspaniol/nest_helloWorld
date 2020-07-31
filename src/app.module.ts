@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { HelloWorldModule } from './helloworld/helloworld.module';
-import { DatabaseService } from './database/database.service';
+import { DataBaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { DatabaseService } from './database/database.service';
       },
     }),
     HelloWorldModule,
+    DataBaseModule
   ],
-  providers: [DatabaseService],
 })
 export class AppModule {}
