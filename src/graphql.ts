@@ -10,10 +10,17 @@ export interface HelloWorld {
     ID: string;
     count?: number;
     Hello: string;
+    CreatedAt?: Date;
+    UpdatedAt?: Date;
+    DeletedAt?: Date;
 }
 
 export interface IQuery {
-    add(id: string): HelloWorld | Promise<HelloWorld>;
+    get(id: string): HelloWorld | Promise<HelloWorld>;
+}
+
+export interface IMutation {
+    create(message?: string): HelloWorld | Promise<HelloWorld>;
 }
 
 export interface ISubscription {

@@ -1,22 +1,18 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { HelloworldService } from './helloworld.service';
-import { HelloWorld } from './helloworld';
+import { HelloWorld } from './helloworld.entity';
 
 @Resolver('Helloworld')
 export class HelloworldResolver {
   constructor(private helloworldService: HelloworldService) {}
 
-  private toAdd(count: number): HelloWorld {
-    return {
-      ID: 1,
-      count: count,
-      Hello: 'world',
-    };
+  @Query('get')
+  get(@Args('id') id: number): Promise<HelloWorld> {
+    return this.helloworldService.getHelloWorld(id);
   }
 
-  @Query('add')
-  add(@Args('id') id: number) {
-    console.log(id)
-    return this.toAdd(this.helloworldService.getCount());
+  @Mutation('create')
+  create(@Args('message') msm: string):Promise<HelloWorld>{
+    return this.helloworldService.createHelloWorld(msm)
   }
 }

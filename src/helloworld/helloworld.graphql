@@ -1,11 +1,20 @@
+scalar Date
+
 type HelloWorld {
   ID: ID!
   count: Int
   Hello: String!
+  CreatedAt: Date
+  UpdatedAt: Date
+  DeletedAt: Date
 }
 
 type Query {
-  add(id: ID!): HelloWorld
+  get(id: ID!): HelloWorld
+}
+
+type Mutation {
+  create(message: String): HelloWorld
 }
 
 type Subscription {

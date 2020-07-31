@@ -1,13 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
+import { HelloWorld } from './helloworld.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class HelloworldService {
-    constructor(){}
-    
-    private count = 1
+  constructor(
+    @Inject('HELLOWORLD_REPOSITORY')
+    private helloWorldRepository: Repository<HelloWorld>,
+  ) {}
 
-    getCount(){
-        return this.count++
+  async getHelloWorld(id: number): Promise<HelloWorld>{
+    const found = await this.helloWorldRepository.findOne(id);
+    if (!found) {
+        throw new NotFoundException(`helloWorld id: ${id} not found`)
     }
-    
+    return found;
+  }
+
+
+  async createHelloWorld(message:string):Promise<HelloWorld>{
+    const created = await this.helloWorldRepository.create()
+    created.Hello = message
+    const result = await this.helloWorldRepository.save(created)
+    return result
+  }
 }
