@@ -1,8 +1,12 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation,Subscription } from '@nestjs/graphql';
 import { HelloworldService } from './helloworld.service';
 import { HelloWorld } from './helloworld.entity';
+import { PubSub } from 'graphql-subscriptions';
 
-@Resolver('Helloworld')
+
+
+const pubSub = new PubSub();
+
 export class HelloworldResolver {
   constructor(private helloworldService: HelloworldService) {}
 
@@ -13,6 +17,13 @@ export class HelloworldResolver {
 
   @Mutation('create')
   create(@Args('message') msm: string):Promise<HelloWorld>{
-    return this.helloworldService.createHelloWorld(msm)
+    const result = this.helloworldService.createHelloWorld(msm)
+    pubSub.publish('addedHelloWorld',{addedHelloWorld: result})
+    return result
+  }
+
+  @Subscription('addedHelloWorld')
+  addedHelloWorld(){
+    return pubSub.asyncIterator('addedHelloWorld')
   }
 }

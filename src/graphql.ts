@@ -24,5 +24,5 @@ export interface IMutation {
 }
 
 export interface ISubscription {
-    addHelloWorld(): HelloWorld | Promise<HelloWorld>;
+    addedHelloWorld(): HelloWorld | Promise<HelloWorld>;
 }

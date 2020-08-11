@@ -10,6 +10,10 @@ import { HelloWorldModule } from './helloworld/helloworld.module';
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
+      installSubscriptionHandlers: true,
+      subscriptions: {
+        keepAlive: 5000,
+      }
     }),
     HelloWorldModule,
   ],
